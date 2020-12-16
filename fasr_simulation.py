@@ -17,7 +17,7 @@ from simobserve_cli import simobserve_cli as simobserve
 
 
 def ksc_site2cfg(sitefile='sites/KSC_Antenna_Sites.txt', ants=[0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 12],
-                 cfgfile='ksc-all.cfg', dishdiam=7, write2casa=True):
+                 cfgfile='ksc-all.cfg', dishdiam=7, write2casa=True, verbose=True):
     """
     Read txt file of KSC antenna sites and write antenna configuration file in CASA
     :param sitefile: Input site file that contains longitudes and latitudes of the antenna sites (from KSC team)
@@ -74,10 +74,16 @@ def ksc_site2cfg(sitefile='sites/KSC_Antenna_Sites.txt', ants=[0, 1, 2, 3, 4, 5,
     for i in range(len(xs_all)):
         f.write('{0} {1} {2} {3} K{4:02d}\n'.format(xs_all[i], ys_all[i], zs_all[i], dishdiam, i))
     f.close()
+    casalog.post('Generated antenna configuration file from {0:s} as {1:s}'.format(sitefile, cfgfile))
+    if verbose:
+        print('Generated antenna configuration file from {0:s} as {1:s}'.format(sitefile, cfgfile))
 
     if write2casa:
         repodir = os.getenv("CASAPATH").split(' ')[0] + "/data/alma/simmos/"
-        os.system('mv ' + cfgfile + ' ' + repodir)
+        os.system('cp ' + cfgfile + ' ' + repodir)
+        casalog.post('Antenna configuration file {0:s} written to CASA'.format(cfgfile))
+        if verbose:
+            print('Antenna configuration file {0:s} written to CASA'.format(cfgfile))
 
     # set voltage patterns and primary beams for KSC 7 m. This is a placeholder for now (but required for PB correction)
     vp = vptool()
