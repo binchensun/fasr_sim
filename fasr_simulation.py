@@ -17,7 +17,7 @@ from simobserve_cli import simobserve_cli as simobserve
 
 
 def ksc_site2cfg(sitefile='sites/KSC_Antenna_Sites.txt', ants=[0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 12],
-                 dishdiam=7, overwrite=True):
+                 cfgfile='ksc-all.cfg', dishdiam=7, write2casa=True):
     """
     Read txt file of KSC antenna sites and write antenna configuration file in CASA
     :param sitefile: Input site file that contains longitudes and latitudes of the antenna sites (from KSC team)
@@ -66,8 +66,7 @@ def ksc_site2cfg(sitefile='sites/KSC_Antenna_Sites.txt', ants=[0, 1, 2, 3, 4, 5,
     # antnames = np.array(antnames)[ants]
     # antidxs = np.array(antidxs)[ants]
 
-    cfg_all = 'ksc-all.cfg'
-    f = open(cfg_all, 'w')
+    f = open(cfgfile, 'w')
     f.write('#observatory=KSC\n')
     # f.write('#COFA={0:.5f}, {1:.5f}\n'.format(lats[idx0], lons[idx0]))
     f.write('#coordsys=XYZ\n')
@@ -76,9 +75,9 @@ def ksc_site2cfg(sitefile='sites/KSC_Antenna_Sites.txt', ants=[0, 1, 2, 3, 4, 5,
         f.write('{0} {1} {2} {3} K{4:02d}\n'.format(xs_all[i], ys_all[i], zs_all[i], dishdiam, i))
     f.close()
 
-    if overwrite:
+    if write2casa:
         repodir = os.getenv("CASAPATH").split(' ')[0] + "/data/alma/simmos/"
-        os.system('cp ' + cfg_all + ' ' + repodir)
+        os.system('mv ' + cfgfile + ' ' + repodir)
 
     # set voltage patterns and primary beams for KSC 7 m. This is a placeholder for now (but required for PB correction)
     vp = vptool()
