@@ -1,0 +1,52 @@
+Antenna Site (A)
+	<longitude>-80.63626399481161</longitude>
+	<latitude>28.50957503726789</latitude>
+1059 Antenna Site (B)
+	<longitude>-80.63960186564613</longitude>
+	<latitude>28.51346854507722</latitude>
+Boresight Antenna Site (C)
+	<longitude>-80.64160267814059</longitude>
+	<latitude>28.51209255878269</latitude>
+MILA Antenna Site (1)
+	<longitude>-80.69297634571943</longitude>
+	<latitude>28.50762163996798</latitude>
+FTA Antenna Site (2)
+	<longitude>-80.6198698574588</longitude>
+	<latitude>28.5489821475874</latitude>
+ISTEF Antenna Site 1m (3)
+	<longitude>-80.65221589980936</longitude>
+	<latitude>28.46457106146372</latitude>
+ISTEF Antenna Site 7m (4)
+	<longitude>-80.65221589980936</longitude>
+	<latitude>28.46457106146372</latitude>
+North UCS Site (5)
+	<longitude>-80.71857111037916</longitude>
+	<latitude>28.6870150158692</latitude>
+1059 South Site (6)
+	<longitude>-80.64160267814059</longitude>
+	<latitude>28.51209255878269</latitude>
+PRF Antenna Site (7)
+	<longitude>-80.6420362990621</longitude>
+	<latitude>28.51834061221175</latitude>
+SLF Antenna Site (8)
+	<longitude>-80.69567996871228</longitude>
+	<latitude>28.62619529467755</latitude>
+SLF 1m Antenna Site (9)
+	<longitude>-80.69567996871228</longitude>
+	<latitude>28.62619529467755</latitude>
+Possible Antenna Site (10)
+	<longitude>-80.69173892362153</longitude>
+	<latitude>28.55462268075798</latitude>
+
+A-B = 660 m
+B-C = 473 m
+C-A = 774 m
+A-1 = 5575 m
+A-2 = 4750 m
+A-3 = 5246 m
+A-4 = 5185 m
+A-5 = 21290 m
+A-6 = 631 m
+A-7 = 1362 m
+A-8 = 14197 m
+A-10 = 8105 m
