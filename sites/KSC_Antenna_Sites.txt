@@ -37,16 +37,3 @@ SLF 1m Antenna Site (9)
 Possible Antenna Site (10)
 	<longitude>-80.69173892362153</longitude>
 	<latitude>28.55462268075798</latitude>
-
-A-B = 660 m
-B-C = 473 m
-C-A = 774 m
-A-1 = 5575 m
-A-2 = 4750 m
-A-3 = 5246 m
-A-4 = 5185 m
-A-5 = 21290 m
-A-6 = 631 m
-A-7 = 1362 m
-A-8 = 14197 m
-A-10 = 8105 m
