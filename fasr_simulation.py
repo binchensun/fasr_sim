@@ -94,6 +94,7 @@ def ksc_site2cfg(sitefile='sites/KSC_Antenna_Sites.txt', ants=[0, 1, 2, 3, 4, 5,
     obstable = os.getenv("CASAPATH").split(' ')[0] + "/data/geodetic/Observatories"
     tb.open(obstable, nomodify=True)
     if 'KSC' not in tb.getcol('Name'):
+        print('KSC not in Observatories. Adding a record to {s}'.format(obstable))
         obsdict_dsc = {'MJD': 59147.0, 'Name': 'KSC', 'Type': 'WGS84', 'Long': -80.693, 'Lat': 28.508, 'Height': 3.00,
                        'X': 0.0, 'Y': 0.0, 'Z': 0.0, 'Source': 'EOVSA Team'}
         tb.open(obstable, nomodify=False)
