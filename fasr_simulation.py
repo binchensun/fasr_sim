@@ -11,8 +11,7 @@ from simutil import simutil as su
 import matplotlib.pyplot as plt
 from astropy import units as u
 import os, re
-from taskinit import casalog
-from taskinit import vptool
+from taskinit import casalog, vptool, tb
 from simobserve_cli import simobserve_cli as simobserve
 
 
