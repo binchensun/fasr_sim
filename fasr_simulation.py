@@ -92,6 +92,18 @@ def ksc_site2cfg(sitefile='sites/KSC_Antenna_Sites.txt', ants=[0, 1, 2, 3, 4, 5,
                              blockagediam='0.75m', maxrad='1.784deg',
                              reffreq='1.0GHz', dopb=True)
 
+    if 'KSC' not in tb.getcol('Name'):
+        obstable = os.getenv("CASAPATH").split(' ')[0] + "/data/geodetic/Observatories"
+        obsdict_dsc = {'MJD': 59147.0, 'Name': 'KSC', 'Type': 'WGS84', 'Long': -80.693, 'Lat': 28.508, 'Height': 3.00,
+                       'X': 0.0, 'Y': 0.0, 'Z': 0.0, 'Source': 'EOVSA Team'}
+        tb.open(obstable, nomodify=False)
+        nrows = tb.nrows()
+        tb.addrows(1)
+        for i in obsdict_dsc.keys():
+            tb.putcell(i, nrows, obsdict_dsc[i])
+        tb.close()
+
+
 
 def ksc_sim_type3(projname='sim_type3', skymodel='skymodels/sun_t191028.75_0.05s_spw0-3_mfs_I.image',
                   incell='1arcsec', incenter='1.2GHz', inwidth='1MHz', hourangle='transit',
