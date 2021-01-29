@@ -187,7 +187,7 @@ def kml2cfg(kmlfile='sites/KSC_Antenna_Sites_7m.kml', dishdiam=7, cfgfile='ksc-7
     :param overwrite: Overwrite the cfg file in CASA? Default is True
     :return:
     """
-    (antnames, lons, lats) = kml2coords(kmlfile)
+    (lons, lats, antnames) = kml2coords(kmlfile)
     coords2cfg(lons, lats, antnames=antnames, antidxs=None, cfgfile=cfgfile, arrayname=arrayname,
                dishdiam=dishdiam, write2casa=write2casa, verbose=verbose)
 
