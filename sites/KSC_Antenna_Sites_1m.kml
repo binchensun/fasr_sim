@@ -1,0 +1,102 @@
+<kml xmlns="http://www.opengis.net/kml/2.2"> 
+<Document> 
+<Folder xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns="http://www.opengis.net/kml/2.2">
+  <Placemark>
+    <name>1m A</name>
+    <Point>
+      <coordinates>-80.6401371284078, 28.5199956669054</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m B</name>
+    <Point>
+      <coordinates>-80.6392657847281, 28.5188056005155</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m C</name>
+    <Point>
+      <coordinates>-80.6401181920494, 28.5172264497091</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m D</name>
+    <Point>
+      <coordinates>-80.6396609310274, 28.5183701405609</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m E</name>
+    <Point>
+      <coordinates>-80.6360397309249, 28.5177041602780</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m F</name>
+    <Point>
+      <coordinates>-80.6385440860231, 28.5167486135118</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m G</name>
+    <Point>
+      <coordinates>-80.6376978818270, 28.5179059102956</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m H</name>
+    <Point>
+      <coordinates>-80.6354011846436, 28.5191302317527</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m I</name>
+    <Point>
+      <coordinates>-80.6377533545934, 28.5204479325979</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m J</name>
+    <Point>
+      <coordinates>-80.6365620954936, 28.5187897640992</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m K</name>
+    <Point>
+      <coordinates>-80.6389166973461, 28.5176663425346</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m L</name>
+    <Point>
+      <coordinates>-80.6369676746211, 28.5174510604596</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m M</name>
+    <Point>
+      <coordinates>-80.6376282211915, 28.5170252178016</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m N</name>
+    <Point>
+      <coordinates>-80.6381549133272, 28.5189796318460</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m O</name>
+    <Point>
+      <coordinates>-80.6377855012259, 28.5194799464348</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>1m P</name>
+    <Point>
+      <coordinates>-80.6388206597740, 28.5155310164790</coordinates>
+    </Point>
+  </Placemark>
+</Folder>
+</Document> 
+</kml> 

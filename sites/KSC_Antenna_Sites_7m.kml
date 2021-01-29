@@ -1,0 +1,66 @@
+<kml xmlns="http://www.opengis.net/kml/2.2"> 
+<Document> 
+<Folder xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns="http://www.opengis.net/kml/2.2">
+  <Placemark>
+    <name>7m 1</name>
+    <Point>
+      <coordinates>-80.6366031627883, 28.5093924608553</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>7m 2</name>
+    <Point>
+      <coordinates>-80.6423138221269, 28.5137412453487</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>7m 3</name>
+    <Point>
+      <coordinates>-80.6373005133542, 28.5164351128824</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>7m 4</name>
+    <Point>
+      <coordinates>-80.6340355508970, 28.5268061416961</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>7m 5</name>
+    <Point>
+      <coordinates>-80.6422470380628, 28.5092848473056</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>7m 6</name>
+    <Point>
+      <coordinates>-80.6424639626402, 28.5386321287852</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>7m 7</name>
+    <Point>
+      <coordinates>-80.6330992743856, 28.5078593241104</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>7m 8</name>
+    <Point>
+      <coordinates>-80.6503171548091, 28.5118695254117</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>7m 9</name>
+    <Point>
+      <coordinates>-80.6442397546819, 28.5195860545185</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>7m 10</name>
+    <Point>
+      <coordinates>-80.6652660403753, 28.5178146414530</coordinates>
+    </Point>
+  </Placemark>
+</Folder>
+</Document> 
+</kml> 
