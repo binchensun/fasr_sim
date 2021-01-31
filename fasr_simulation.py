@@ -230,8 +230,8 @@ def ksc_sim_gauss(projname='sim_7m_array_1GHz_gaus', antennalist='ksc-7m.cfg', d
     cs.setincrement([-cell_rad, cell_rad], 'direction')
     ra_ref = qa.toangle(indirection.split(' ')[1])
     dec_ref = qa.toangle(indirection.split(' ')[2])
-    ra = ra_ref['value'] + radec_offset[0] / 3600.
-    dec = dec_ref['value'] + radec_offset[1] / 3600.
+    ra = ra_ref['value'] - radec_offset[0] / 3600.
+    dec = dec_ref['value'] - radec_offset[1] / 3600.
     cs.setreferencevalue([qa.convert('{0:.4f}deg'.format(ra), 'rad')['value'],
                           qa.convert('{0:.4f}deg'.format(dec), 'rad')['value']], type="direction")
     cs.setreferencevalue("1.0GHz", 'spectral')
