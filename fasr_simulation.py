@@ -11,8 +11,10 @@ from simutil import simutil as su
 import matplotlib.pyplot as plt
 from astropy import units as u
 import os, re
-from taskinit import casalog, vptool, tb
+from taskinit import casalog, vptool, tb, cltool, iatool, qa
 from simobserve_cli import simobserve_cli as simobserve
+from tclean_cli import tclean_cli as tclean
+from viewer_cli import viewer_cli as viewer
 
 def kml2coords(kmlfile='sites/KSC_Antenna_Sites.kml'):
     """
@@ -158,12 +160,6 @@ def coords2cfg(lons, lats, antnames=None, antidxs=None, cfgfile='ksc-7m.cfg', ar
         if verbose:
             print('Antenna configuration file {0:s} written to CASA'.format(cfgfile))
 
-    # set voltage patterns and primary beams for KSC 7 m. This is a placeholder for now (but required for PB correction)
-    vp = vptool()
-    if len(vp.getvp(telescope='KSC').keys()) == 0:
-        vprec = vp.setpbairy(telescope='KSC', dishdiam='{0:.1f}m'.format(dishdiam),
-                             blockagediam='0.75m', maxrad='1.784deg',
-                             reffreq='1.0GHz', dopb=True)
 
     obstable = os.getenv("CASAPATH").split(' ')[0] + "/data/geodetic/Observatories"
     tb.open(obstable, nomodify=True)
@@ -192,9 +188,70 @@ def kml2cfg(kmlfile='sites/KSC_Antenna_Sites_7m.kml', dishdiam=7, cfgfile='ksc-7
                dishdiam=dishdiam, write2casa=write2casa, verbose=verbose)
 
 
-def ksc_sim_type3(projname='sim_type3', skymodel='skymodels/sun_t191028.75_0.05s_spw0-3_mfs_I.image',
-                  incell='1arcsec', incenter='1.2GHz', inwidth='1MHz', hourangle='transit',
-                  refdate='2014/11/01', totaltime='120s', antennalist='ksc-all.cfg'):
-    simobserve(project=projname, skymodel=skymodel, indirection='', incell=incell, incenter=incenter,
-               inwidth=inwidth, obsmode='int', hourangle=hourangle, refdate=refdate, totaltime=totaltime,
-               antennalist=antennalist)
+def ksc_sim_gauss(projname='sim_7m_array_1GHz_gaus', antennalist='ksc-7m.cfg', dishdiam=7, imagename=None,
+                  indirection='J2000 14h26m46.0s -14d31m22.0s', incell='1arcsec', frequency='1.0GHz', inwidth='1MHz',
+                  radec_offset=[100., 100.], flux=50., majoraxis='40arcsec', minoraxis='27arcsec',
+                  positionangle='45.0deg', imsize=[512, 512]):
+    """
+    Simulate observation of an input Gaussian model
+    :param projname: project name for simobserve
+    :param antennalist: cfg file of the array configuration
+    :param dishdiam: diameter of each dish, in meters
+    :param imagename: name (and path) for output clean image, psf, etc.
+    :param indirection: phase center of the observation
+    :param incell: pixel scale of the model/simulated image
+    :param frequency: central frequency
+    :param inwidth: frequency bandwidth
+    :param radec_offset: offset of the Gaussian source from the phasecenter, in arcsec
+    :param flux: total flux of the Gaussian source, in solar flux unit (sfu)
+    :param majoraxis: FWHM size of the Gaussian source along the major axis
+    :param minoraxis: FWHM size of the Gaussian source along the minor axis
+    :param positionangle: position angle of the Gaussian source
+    :param imsize: size of the model/simulated image, in pixels (x and y)
+    :return:
+    """
+
+    # set voltage patterns and primary beams for KSC 7 m. This is a placeholder for now (but required for PB correction)
+    vp = vptool()
+    if len(vp.getvp(telescope='KSC').keys()) == 0:
+        vprec = vp.setpbairy(telescope='KSC', dishdiam='{0:.1f}m'.format(dishdiam),
+                             blockagediam='0.75m', maxrad='1.784deg',
+                             reffreq='1.0GHz', dopb=True)
+
+    # make a Gaussian source
+    cl = cltool()
+    ia = iatool()
+    cl.addcomponent(dir=indirection, flux=flux*1e4, fluxunit='Jy', freq=frequency, shape="Gaussian",
+                    majoraxis=majoraxis, minoraxis=minoraxis, positionangle=positionangle)
+    ia.fromshape("Gaussian.im", imsize + [1, 1], overwrite=True)
+    cs = ia.coordsys()
+    cs.setunits(['rad', 'rad', '', 'Hz'])
+    cell_rad = qa.convert(qa.quantity(incell), "rad")['value']
+    cs.setincrement([-cell_rad, cell_rad], 'direction')
+    ra_ref = qa.toangle(indirection.split(' ')[1])
+    dec_ref = qa.toangle(indirection.split(' ')[2])
+    ra = ra_ref['value'] + radec_offset[0] / 3600.
+    dec = dec_ref['value'] + radec_offset[1] / 3600.
+    cs.setreferencevalue([qa.convert('{0:.4f}deg'.format(ra), 'rad')['value'],
+                          qa.convert('{0:.4f}deg'.format(dec), 'rad')['value']], type="direction")
+    cs.setreferencevalue("1.0GHz", 'spectral')
+    cs.setincrement('10MHz', 'spectral')
+    ia.setcoordsys(cs.torecord())
+    ia.setbrightnessunit("Jy/pixel")
+    ia.modify(cl.torecord(), subtract=False)
+    ia.close()
+
+    simobserve(project=projname, skymodel='Gaussian.im', indirection=indirection,
+               incell=incell, incenter=frequency, inwidth=inwidth, hourangle='transit', refdate='2014/11/01',
+               totaltime='120s', antennalist=antennalist, obsmode='int', overwrite=True)
+
+    if not imagename:
+        imagename = projname + '/tst'
+    tclean(vis=projname+'/'+projname + '.' + antennalist.split('.')[0] + '.ms', imagename=imagename,
+           imsize=imsize, cell=incell, phasecenter=indirection, niter=200, interactive=False)
+
+    viewer(projname+'/'+projname + '.' + antennalist.split('.')[0] + '.skymodel')
+    viewer(imagename+'.psf')
+    viewer(imagename+'.image')
+
+
